@@ -1,0 +1,8 @@
+{
+  "name": "jitsu/sqldb",
+  "autoload": {
+    "psr-4": {
+      "Jitsu\\Sql\\": "src/"
+    }
+  }
+}
