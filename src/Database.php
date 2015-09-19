@@ -238,7 +238,7 @@ abstract class Database {
 	/**
 	 * Get the id of the last inserted record.
 	 *
-	 * *Note that the result is always a string*.
+	 * *Note that the result is always a string.*
 	 *
 	 * @return string
 	 * @throws \Jitsu\Sql\DatabaseException

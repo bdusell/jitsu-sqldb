@@ -1,5 +1,18 @@
 {
   "name": "jitsu/sqldb",
+  "description": "Convenient OOP interface to SQL databases",
+  "keywords": ["sql", "database", "pdo", "sqlite", "mysql"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Brian DuSell",
+      "email": "bdusell@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
   "autoload": {
     "psr-4": {
       "Jitsu\\Sql\\": "src/"
