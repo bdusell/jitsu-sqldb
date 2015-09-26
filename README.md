@@ -11,6 +11,7 @@ particular.
 Here's an example:
 
 ```php
+<?php
 use Jitsu\Sql\Database;
 use Jitsu\Sql\MysqlDatabase;
 
@@ -62,5 +63,51 @@ if($exists) {
   echo "You have already bookmarked this package.\n"
 } else {
   echo "You have not bookmarked this package.\n";
+}
+```
+
+This package also defines a database plugin for the `jitsu/app` package.
+Including the trait `\Jitsu\App\Databases` in your application class adds a
+`database` method which can be used to configure a database connection for
+your application to use. The request handler which this `database` method
+registers adds a database connection object to the request `$data` object. This
+database object comes with a twist &mdash; it is lazily loaded, meaning that
+the database connection will not be established until one of the object's
+methods is used. This makes it easy to configure a database connection for
+multiple request handlers in your application to use, but to avoid making that
+connection when your application routes to a handler which does not need the
+database at all (such as a page-not-found handler).
+
+The `database` method accepts two arguments: the name of the property on the
+request `$data` object which the connection object will be assigned to, and the
+configuration options, which are defined in an array. For the second argument,
+the `database` method will accept either an array or the name of a property on
+the `$data->config` object. Be default, this is the same as the first argument.
+The first argument also defaults to `'database'`.
+
+A quick example:
+
+```php
+<?php
+class MyApp extends \Jitsu\App\Application {
+  use \Jitsu\App\Databases;
+  public function initialize() {
+    $this->database('database', [
+      'driver'     => 'mysql',
+      'host'       => 'localhost',
+      'database'   => 'my_database',
+      'user'       => 'my_user',
+      'password'   => 'shhhhhhh',
+      'persistent' => true
+    ]);
+    $this->get('count-users', function($data) {
+      $count = $data->database->evaluate('select count(*) from `users`');
+      echo "There are $count users. Honestly, that's $count more than I expected.\n";
+    });
+    $this->notFound(function($data) {
+      $data->response->setStatusCode(404, 'Not Found');
+      echo "Nothing to see here. No database connection made.\n";
+    });
+  }
 }
 ```
