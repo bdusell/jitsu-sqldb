@@ -4,11 +4,22 @@ namespace Jitsu\App\Handlers;
 
 use Jitsu\ArrayUtil;
 
+/**
+ * Handler for adding a database connection object to `$data` based on
+ * configuration settings.
+ */
 class ConfigureDatabase implements \Jitsu\App\Handler {
 
 	private $data_prop;
 	private $config;
 
+	/**
+	 * @param string $data_prop Name of the property on `$data` where the
+	 *        connection object will be assigned.
+	 * @param array|string Configuration settings for the database
+	 *        connection. Either an array or the name of a property on
+	 *        `$data->config`.
+	 */
 	public function __construct($data_prop, $config) {
 		$this->data_prop = $data_prop;
 		$this->config = $config;

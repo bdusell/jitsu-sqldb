@@ -1,5 +1,5 @@
-Jitsu SQL Database Wrapper
---------------------------
+jitsu/sqldb
+-----------
 
 This package defines a convenient object-oriented interface to SQL databases
 and SQL statements, built on top of PHP's PDO library. While PDO already
@@ -7,6 +7,23 @@ provides a unified, object-oriented API supporting multiple SQL drivers, this
 library offers an API which is easier to use, adding some extra helper methods
 and providing better error handling. It makes parameter binding less painful in
 particular.
+
+This package is part of [Jitsu](https://github.com/bdusell/jitsu).
+
+## Installation
+
+Install this package with [Composer](https://getcomposer.org/):
+
+```sh
+composer require jitsu/sqldb
+```
+
+## Namespace
+
+All classes are defined under the namespace `Jitsu`. The SQL-related classes
+are defined under `Jitsu\Sql`.
+
+## Usage
 
 Here's an example:
 
@@ -66,12 +83,13 @@ if($exists) {
 }
 ```
 
-This package also defines a database plugin for the `jitsu/app` package.
+This package also defines a database plugin for the
+[jitsu/app](https://github.com/bdusell/jitsu-app) package.
 Including the trait `\Jitsu\App\Databases` in your application class adds a
 `database` method which can be used to configure a database connection for
 your application to use. The request handler which this `database` method
 registers adds a database connection object to the request `$data` object. This
-database object comes with a twist &mdash; it is lazily loaded, meaning that
+database object comes with a twist &ndash; it is lazily loaded, meaning that
 the database connection will not be established until one of the object's
 methods is used. This makes it easy to configure a database connection for
 multiple request handlers in your application to use, but to avoid making that
@@ -82,7 +100,7 @@ The `database` method accepts two arguments: the name of the property on the
 request `$data` object which the connection object will be assigned to, and the
 configuration options, which are defined in an array. For the second argument,
 the `database` method will accept either an array or the name of a property on
-the `$data->config` object. Be default, this is the same as the first argument.
+the `$data->config` object. By default, this is the same as the first argument.
 The first argument also defaults to `'database'`.
 
 A quick example:
@@ -111,3 +129,6 @@ class MyApp extends \Jitsu\App\Application {
   }
 }
 ```
+
+## API
+

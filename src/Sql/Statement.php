@@ -16,9 +16,10 @@ class Statement implements \Iterator, QueryResultInterface {
 	 * Construct a SQL statement object.
 	 *
 	 * Optionally specify a fetch mode, which determines the form in which
-	 * are fetched. Use the `PDO::FETCH_` constants directly. The default
-	 * is `PDO::FETCH_OBJ`, which causes rows to be returned as `stdClass`
-	 * objects with property names corresponding to column names.
+	 * rows are fetched. Use the `PDO::FETCH_` constants directly. The
+	 * default is `PDO::FETCH_OBJ`, which causes rows to be returned as
+	 * `stdClass` objects with property names corresponding to column
+	 * names.
 	 *
 	 * @param \PDOStatement $stmt
 	 * @param mixed $mode
@@ -39,9 +40,13 @@ class Statement implements \Iterator, QueryResultInterface {
 	 *     foreach($stmt as $row) echo $name, "\n";
 	 *
 	 * A type may optionally be specified. The following values may be
-	 * passed as strings: `bool`, `null`, `int`, `str`, `lob` (large
-	 * object). If a type is not passed, then it is inferred from the type
-	 * of the PHP value passed.
+	 * passed as strings:
+	 *
+	 * * `bool`
+	 * * `null`
+	 * * `int`
+	 * * `str`
+	 * * `lob` (large object)
 	 *
 	 * The `$inout` parameter specifies whether the column is an
 	 * `INOUT` parameter for a stored procedure.
@@ -106,7 +111,6 @@ class Statement implements \Iterator, QueryResultInterface {
 	 * @param mixed $value
 	 * @param string|null $type
 	 * @param bool $type
-	 *
 	 */
 	public function assignInput($param, $value, $type = null, $inout = false) {
 		if($type === null) {
@@ -129,8 +133,10 @@ class Statement implements \Iterator, QueryResultInterface {
 	 *
 	 *     $stmt = $db->prepare('select * from users where first = ? and last = ?');
 	 *     $stmt->assign('John', 'Doe');
+	 *
+	 * @param mixed $values,...
 	 */
-	public function assign(/* $values | $value1, $value2, ... */) {
+	public function assign(/* $values,... */) {
 		$this->assignWith(
 			func_num_args() > 1 || !is_array(func_get_arg(0)) ?
 			func_get_args() :
@@ -139,6 +145,8 @@ class Statement implements \Iterator, QueryResultInterface {
 	}
 
 	/**
+	 * Like `assign`, but arguments are always passed in an array.
+	 *
 	 * @param array $values
 	 */
 	public function assignWith($values) {
@@ -161,10 +169,8 @@ class Statement implements \Iterator, QueryResultInterface {
 	 *
 	 * The values array may be convenient in simple cases, but it only
 	 * works for positional parameters and casts all values to the SQL
-	 * string type (`'str'`). The string casting may cause values to be
-	 * inexplicably stored as integers but later retrieved as strings in
-	 * SQLite, which could cause some annoyance. A more flexible
-	 * alternative is to call `assign` beforehand.
+	 * string type (`'str'`). A more flexible alternative is to call
+	 * `assign` beforehand.
 	 *
 	 * @param array|null $values
 	 */
@@ -308,7 +314,7 @@ class Statement implements \Iterator, QueryResultInterface {
 	}
 
 	/**
-	 * Print debugging information to *stdout*. Returns `$this`.
+	 * Print debugging information to *stdout*.
 	 *
 	 * @return $this
 	 */

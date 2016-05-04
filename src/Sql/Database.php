@@ -34,7 +34,7 @@ abstract class Database {
 				$password,
 				array(
 					/* Check error codes and throw our own
-					* `Error` exceptions. */
+					* exceptions. */
 					\PDO::ATTR_ERRMODE => \PDO::ERRMODE_SILENT
 				) + $options
 			);
@@ -61,11 +61,13 @@ abstract class Database {
 	 *     foreach($stmt as $row) { $row->column_name ... }
 	 *
 	 * @param string $query The SQL query.
-	 * @param mixed $arg,... Arguments to be interpolated into the query.
+	 * @param mixed $args,... Arguments to be interpolated into the query.
+	 *        If a single array is passed, its contents are used as the
+	 *        arguments.
 	 * @return \Jitsu\Sql\Statement
 	 * @throws \Jitsu\Sql\DatabaseException
 	 */
-	public function query(/* $query, [ $args | $arg1, $arg2, ... ] */) {
+	public function query(/* $query, $args,... */) {
 		self::_normalizeArgs(func_get_args(), $query, $args);
 		return $this->queryWith($query, $args);
 	}
@@ -101,16 +103,18 @@ abstract class Database {
 	 * Return the first row of a query and ignore the rest.
 	 *
 	 * @param string $query
-	 * @param mixed $arg,...
+	 * @param mixed $args,...
 	 * @return \Jitsu\Sql\Statement
 	 * @throws \Jitsu\Sql\DatabaseException
 	 */
-	public function row() {
+	public function row(/* $query, $args,... */) {
 		self::_normalizeArgs(func_get_args(), $query, $args);
 		return $this->rowWith($query, $args);
 	}
 
 	/**
+	 * Like `row`, but arguments are always passed in an array.
+	 *
 	 * @param string $query
 	 * @param array $args
 	 * @return \Jitsu\Sql\Statement
@@ -125,16 +129,18 @@ abstract class Database {
 	 * else.
 	 *
 	 * @param string $query
-	 * @param mixed $arg,...
+	 * @param mixed $args,...
 	 * @return \Jitsu\Sql\Statement
 	 * @throws \Jitsu\Sql\DatabaseException
 	 */
-	public function evaluate() {
+	public function evaluate(/* $query, $args,... */) {
 		self::_normalizeArgs(func_get_args(), $query, $args);
 		return $this->evaluateWith($query, $args);
 	}
 
 	/**
+	 * Like `evaluate`, but arguments are always passed in an array.
+	 *
 	 * @param string $query
 	 * @param array $args
 	 * @return \Jitsu\Sql\Statement
@@ -164,6 +170,8 @@ abstract class Database {
 	}
 
 	/**
+	 * Like `execute`, but arguments are always passed in an array.
+	 *
 	 * @param string $query
 	 * @param array $args
 	 * @return \Jitsu\Sql\QueryResultInterface
@@ -236,11 +244,12 @@ abstract class Database {
 	}
 
 	/**
-	 * Get the id of the last inserted record.
+	 * Get the ID of the last inserted record.
 	 *
 	 * *Note that the result is always a string.*
 	 *
-	 * @return string
+	 * @return string A string, which you will most likely want to cast to
+	 *                an integer.
 	 * @throws \Jitsu\Sql\DatabaseException
 	 */
 	public function lastInsertId() {
@@ -349,6 +358,21 @@ abstract class Database {
 	 * correspond to a PDO constant with the `PDO::ATTR_` prefix
 	 * dropped.
 	 *
+	 * Possible names are:
+	 *
+	 * * `autocommit`
+	 * * `case`
+	 * * `client_version`
+	 * * `connection_status`
+	 * * `driver_name`
+	 * * `errmode`
+	 * * `oracle_nulls`
+	 * * `persistent`
+	 * * `prefetch`
+	 * * `server_info`
+	 * * `server_version`
+	 * * `timeout`
+	 *
 	 * @param string $name
 	 * @return mixed
 	 * @throws \Jitsu\Sql\DatabaseException
@@ -363,9 +387,9 @@ abstract class Database {
 	/**
 	 * Set a database connection attribute.
 	 *
-	 * Uses the same attribute name convention as `attribute()`. The value
+	 * Uses the same attribute name convention as `attribute`. The value
 	 * should be a string (case-insensitive) corresponding to a PDO
-	 * constant with the `PDO::` prefix dropped.
+	 * constant with the `PDO::ATTR_` prefix dropped.
 	 *
 	 * @param string $name
 	 * @param mixed $value
