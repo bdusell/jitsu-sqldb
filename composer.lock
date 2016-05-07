@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "af73e92595a7597c67918b436bfa64ca",
-    "content-hash": "dfba5adf5a492f0fa386ac39b66cb6da",
+    "hash": "3c9ee93735dbee2c7cbbfd63933a7d17",
+    "content-hash": "b980b2bce2e6c2cf96e23dda5907ef55",
     "packages": [
         {
             "name": "jitsu/array",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bdusell/jitsu-array.git",
-                "reference": "864ce9b83b3222c297b2f1c6fc8c87b5093ef7a2"
+                "reference": "1e86a19bbd79482d1a58862f8716e062fd724afe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bdusell/jitsu-array/zipball/864ce9b83b3222c297b2f1c6fc8c87b5093ef7a2",
-                "reference": "864ce9b83b3222c297b2f1c6fc8c87b5093ef7a2",
+                "url": "https://api.github.com/repos/bdusell/jitsu-array/zipball/1e86a19bbd79482d1a58862f8716e062fd724afe",
+                "reference": "1e86a19bbd79482d1a58862f8716e062fd724afe",
                 "shasum": ""
             },
             "require": {
@@ -49,20 +49,20 @@
                 "array",
                 "utility"
             ],
-            "time": "2015-09-19 00:28:51"
+            "time": "2016-05-07 07:25:40"
         },
         {
             "name": "jitsu/util",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bdusell/jitsu-util.git",
-                "reference": "45558dc120e185f45a160298cd47781dbe90150a"
+                "reference": "47098d47b769e8be7a18c81565f10278a5153a50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bdusell/jitsu-util/zipball/45558dc120e185f45a160298cd47781dbe90150a",
-                "reference": "45558dc120e185f45a160298cd47781dbe90150a",
+                "url": "https://api.github.com/repos/bdusell/jitsu-util/zipball/47098d47b769e8be7a18c81565f10278a5153a50",
+                "reference": "47098d47b769e8be7a18c81565f10278a5153a50",
                 "shasum": ""
             },
             "require": {
@@ -93,7 +93,7 @@
                 "singleton",
                 "utility"
             ],
-            "time": "2015-09-19 01:40:08"
+            "time": "2016-05-07 08:01:16"
         }
     ],
     "packages-dev": [],
