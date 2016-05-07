@@ -15,7 +15,7 @@ class MysqlDatabase extends Database {
 	 * @param string $charset Character set used by the connection. The
 	 *                        default is `utf8mb4`, which supports all
 	 *                        Unicode characters encoded in UTF-8.
-	 * @param array|null Extra PDO options.
+	 * @param array|null $options Extra PDO options.
 	 */
 	public function __construct(
 		$host,

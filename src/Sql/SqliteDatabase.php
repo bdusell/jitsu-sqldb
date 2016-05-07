@@ -17,7 +17,7 @@ class SqliteDatabase extends Database {
 	 *     $db->execute('pragma foreign_keys = off');
 	 *
 	 * @param string $filename Name of the database file.
-	 * @param array|null Extra PDO options.
+	 * @param array|null $options Extra PDO options.
 	 */
 	public function __construct($filename, $options = null) {
 		parent::__construct('sqlite:' . $filename, null, null, $options);
